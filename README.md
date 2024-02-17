@@ -13,5 +13,5 @@ Na generování se hodí celý [tex-live](https://wiki.archlinux.org/title/TeX_L
 Velké díky [hikikomori82](https://github.com/hikikomori82) za jeho úžasný open-source ISO font: [osifont](https://github.com/hikikomori82/osifont)
 
 ## TODO
-[ ] Udělat styl
-[ ] Předělat to konfiguráku
+- [ ] Udělat styl
+- [ ] Předělat to konfiguráku
