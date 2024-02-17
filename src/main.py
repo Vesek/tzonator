@@ -20,7 +20,6 @@ with open(os.path.join(os.path.join(src_path, "templates"), 'template.tex'), 'r'
 def main():
     if request.method == 'POST':
         args = dict(request.form)
-        print(args)
         try:
             if not all(len(string) <= 64 for string in args.values()):
                 raise Exception("Invalid values entered")
@@ -44,7 +43,7 @@ def main():
                 raise Exception("Invalid length or characters")
         except Exception as e:
             print(e)
-            return render_template("index.html", error=e)
+            return render_template("index.html", error=f"Chyba: {e}")
     else:
         return render_template("index.html")
 
