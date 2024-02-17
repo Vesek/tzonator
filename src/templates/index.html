@@ -1,0 +1,36 @@
+<!doctype html>
+<html>
+<head>
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%2210 0 100 100%22><text y=%22.90em%22 font-size=%2290%22>🔏</text></svg>">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<title>TZO-nátor 3000</title>
+
+<body>
+    <form action="/generate" method="get">
+        <label for="docname">Název výkresu:</label>
+        <input
+            type=text oninput="this.value = this.value.toUpperCase()" name=docname>
+        <label for="username">Příjmení:</label>
+        <input
+            type=text oninput="this.value = this.value.toUpperCase()" name=surname>
+        <label for="groupname">Název skupiny:</label>
+        <input
+            type=text oninput="this.value = this.value.toUpperCase()" name=groupname>
+        <label for="id">ID:</label>
+        <input
+            type=text oninput="this.value = this.value.toUpperCase()" name=id>
+        <input
+            type=date oninput="this.value = this.value.toUpperCase()" name=date id=date>
+        <input
+            type=submit value=Generovat>
+    </form>
+    <p>{{error}}</p>
+    <script>
+        document.getElementById('date').valueAsDate = new Date();
+    </script>
+</body>
+
+</html>
