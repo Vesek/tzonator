@@ -3,6 +3,10 @@ FROM python:3.11-slim
 # upgrade pip
 RUN pip install --upgrade pip
 
+# install texlive
+ENV DEBIAN_FRONTEND=noninteractive
+RUN apt update && apt install -y texlive-xetex texlive-latex-extra texlive-fonts-recommended texlive-fonts-extra texlive-lang-all texlive-latex-recommended && rm -rf /var/lib/apt/lists/*
+
 # permissions and nonroot user for tightened security
 RUN adduser --disabled-password --comment "" flask
 RUN mkdir /home/app/ && chown -R flask:flask /home/app
@@ -24,4 +28,4 @@ RUN pip install -r requirements.txt
 EXPOSE 5000
 ENV PYTHONUNBUFFERED 1
 
-CMD ["gunicorn", "-w 4 --bind 0.0.0.0:5000 wsgi:app"]
+CMD ["gunicorn", "-w", "4", "--bind", "0.0.0.0:5000", "wsgi:app"]
