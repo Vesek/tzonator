@@ -5,8 +5,7 @@ Generátor templatu (nejen) na TZO
 "Vyplňovač" TeX templatu protože chcu a protože Menčer.
 
 ## Požadavky
-Fonty se musí stáhnout, je na to shell script download_fonts.sh
-
+Fonty se musí stáhnout, je na to shell script download_fonts.sh.
 Na generování se hodí celý [tex-live](https://wiki.archlinux.org/title/TeX_Live) i s rozšířeními pro jazyky.
 
 ## Zdroje
