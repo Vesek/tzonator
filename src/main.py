@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, send_file
+from flask import Flask, render_template, request, send_file, send_from_directory
 from string import Template
 from datetime import date
 import re
@@ -46,6 +46,11 @@ def main():
             return render_template("index.html", error=f"Chyba: {e}")
     else:
         return render_template("index.html")
+
+
+@app.route('/fonts/<path:path>')
+def send_report(path):
+    return send_from_directory('fonts', path)
 
 
 @app.errorhandler(404)
