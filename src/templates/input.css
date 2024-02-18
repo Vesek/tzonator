@@ -2,6 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+    @font-face  {
+        font-family: OSIfont;
+        font-weight: 400;
+        src: url(../fonts/osifont-lgpl3fe.ttf);
+    }
+}
+
 @layer components{
     .input {
         @apply font-normal text-neutral-900 dark:text-neutral-200 placeholder:text-neutral-600 p-2 border border-neutral-600;

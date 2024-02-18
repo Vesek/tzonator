@@ -444,6 +444,14 @@ video {
   display: none;
 }
 
+@font-face  {
+  font-family: OSIfont;
+
+  font-weight: 400;
+
+  src: url(../fonts/osifont-lgpl3fe.ttf);
+}
+
 *, ::before, ::after {
   --tw-border-spacing-x: 0;
   --tw-border-spacing-y: 0;
@@ -583,8 +591,16 @@ video {
   }
 }
 
+.static {
+  position: static;
+}
+
 .absolute {
   position: absolute;
+}
+
+.relative {
+  position: relative;
 }
 
 .bottom-2 {
@@ -593,6 +609,14 @@ video {
 
 .right-2 {
   right: 0.5rem;
+}
+
+.bottom-1 {
+  bottom: 0.25rem;
+}
+
+.left-1 {
+  left: 0.25rem;
 }
 
 .my-1 {
@@ -640,6 +664,20 @@ video {
   border-radius: 0.25rem;
 }
 
+.rounded-xl {
+  border-radius: 0.75rem;
+}
+
+.rounded-b-lg {
+  border-bottom-right-radius: 0.5rem;
+  border-bottom-left-radius: 0.5rem;
+}
+
+.rounded-b-xl {
+  border-bottom-right-radius: 0.75rem;
+  border-bottom-left-radius: 0.75rem;
+}
+
 .border-2 {
   border-width: 2px;
 }
@@ -657,6 +695,90 @@ video {
 .bg-neutral-300 {
   --tw-bg-opacity: 1;
   background-color: rgb(212 212 212 / var(--tw-bg-opacity));
+}
+
+.bg-neutral-500\/75 {
+  background-color: rgb(115 115 115 / 0.75);
+}
+
+.bg-neutral-500\/25 {
+  background-color: rgb(115 115 115 / 0.25);
+}
+
+.bg-neutral-500\/15 {
+  background-color: rgb(115 115 115 / 0.15);
+}
+
+.bg-neutral-500\/5 {
+  background-color: rgb(115 115 115 / 0.05);
+}
+
+.bg-neutral-800\/5 {
+  background-color: rgb(38 38 38 / 0.05);
+}
+
+.bg-neutral-800\/40 {
+  background-color: rgb(38 38 38 / 0.4);
+}
+
+.bg-neutral-800\/70 {
+  background-color: rgb(38 38 38 / 0.7);
+}
+
+.bg-neutral-800\/60 {
+  background-color: rgb(38 38 38 / 0.6);
+}
+
+.bg-neutral-800\/90 {
+  background-color: rgb(38 38 38 / 0.9);
+}
+
+.bg-teal-800\/90 {
+  background-color: rgb(17 94 89 / 0.9);
+}
+
+.bg-teal-800\/50 {
+  background-color: rgb(17 94 89 / 0.5);
+}
+
+.bg-teal-800\/30 {
+  background-color: rgb(17 94 89 / 0.3);
+}
+
+.bg-cyan-800\/30 {
+  background-color: rgb(21 94 117 / 0.3);
+}
+
+.bg-cyan-800\/20 {
+  background-color: rgb(21 94 117 / 0.2);
+}
+
+.bg-neutral-800\/20 {
+  background-color: rgb(38 38 38 / 0.2);
+}
+
+.bg-neutral-800\/80 {
+  background-color: rgb(38 38 38 / 0.8);
+}
+
+.bg-cyan-700\/20 {
+  background-color: rgb(14 116 144 / 0.2);
+}
+
+.bg-cyan-900\/20 {
+  background-color: rgb(22 78 99 / 0.2);
+}
+
+.bg-cyan-900\/10 {
+  background-color: rgb(22 78 99 / 0.1);
+}
+
+.bg-cyan-800\/10 {
+  background-color: rgb(21 94 117 / 0.1);
+}
+
+.bg-cyan-700\/10 {
+  background-color: rgb(14 116 144 / 0.1);
 }
 
 .bg-gradient-to-bl {
@@ -677,8 +799,20 @@ video {
   --tw-gradient-to: #0e7490 var(--tw-gradient-to-position);
 }
 
+.p-2 {
+  padding: 0.5rem;
+}
+
 .p-4 {
   padding: 1rem;
+}
+
+.p-3 {
+  padding: 0.75rem;
+}
+
+.p-1 {
+  padding: 0.25rem;
 }
 
 .px-2 {
@@ -691,8 +825,39 @@ video {
   padding-bottom: 0.25rem;
 }
 
+.px-1 {
+  padding-left: 0.25rem;
+  padding-right: 0.25rem;
+}
+
+.py-3 {
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+}
+
+.pt-3 {
+  padding-top: 0.75rem;
+}
+
+.pt-4 {
+  padding-top: 1rem;
+}
+
+.text-center {
+  text-align: center;
+}
+
 .text-right {
   text-align: right;
+}
+
+.font-osifont {
+  font-family: OSIfont;
+}
+
+.text-6xl {
+  font-size: 3.75rem;
+  line-height: 1;
 }
 
 .font-medium {
@@ -704,24 +869,18 @@ video {
   color: rgb(38 38 38 / var(--tw-text-opacity));
 }
 
-.text-red-900 {
-  --tw-text-opacity: 1;
-  color: rgb(127 29 29 / var(--tw-text-opacity));
-}
-
-.text-red-700 {
-  --tw-text-opacity: 1;
-  color: rgb(185 28 28 / var(--tw-text-opacity));
-}
-
-.text-red-600 {
-  --tw-text-opacity: 1;
-  color: rgb(220 38 38 / var(--tw-text-opacity));
-}
-
 .text-red-800 {
   --tw-text-opacity: 1;
   color: rgb(153 27 27 / var(--tw-text-opacity));
+}
+
+.opacity-50 {
+  opacity: 0.5;
+}
+
+.drop-shadow-xl {
+  --tw-drop-shadow: drop-shadow(0 20px 13px rgb(0 0 0 / 0.03)) drop-shadow(0 8px 5px rgb(0 0 0 / 0.08));
+  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
 }
 
 .hover\:border-neutral-600:hover {

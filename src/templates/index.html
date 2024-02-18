@@ -9,8 +9,11 @@
 </head>
 <title>TZO-nátor 3000</title>
 
-<body>
+<body class="relative">
     <div class="bg-gradient-to-bl from-neutral-400 to-cyan-700 dark:from-neutral-900 dark:to-cyan-950 from-10% w-screen min-h-svh select-none font-medium text-neutral-800 dark:text-neutral-300">
+        <div class="text-6xl px-1 pt-4 font-osifont bg-cyan-800/20 rounded-b-xl drop-shadow-xl">
+            TZO-nátor
+        </div>
         <div class="p-4 w-full md:w-1/2">
             <form action="/" method="post" class="flex flex-col">
                 <label for="docname">Název výkresu:</label>
@@ -31,8 +34,10 @@
                     type=submit value=Stáhnout class="bg-cyan-500 dark:bg-cyan-800 active:bg-cyan-600 dark:active:bg-cyan-900 border-2 border-neutral-700 hover:border-neutral-600 dark:border-neutral-600 dark:hover:border-neutral-700 rounded my-1 py-1 px-2 w-fit">
             </form>
             <p class="text-red-800 dark:text-red-600">{{error}}</p>
-            <p class="absolute bottom-2 right-2 text-right">Vytvořil <a href="https://github.com/Vesek" class="link">Vesek</a><br/><a href="https://github.com/Vesek/tzonator" class="link">Kód</a> otevřený pod AGPL-3<br/>Žádná data nejsou uchována</p>
         </div>
+        <footer>
+            <p class="absolute bottom-2 right-2 text-right">Vytvořil <a href="https://github.com/Vesek" class="link">Vesek</a><br/><a href="https://github.com/Vesek/tzonator" class="link">Kód</a> otevřený pod AGPL-3<br/>Žádná data nejsou uchována</p>
+        </footer>
     </div>
     <script>
         document.getElementById('date').valueAsDate = new Date();
