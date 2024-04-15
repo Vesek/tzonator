@@ -26,7 +26,7 @@ def main():
             args["fontdir"] = font_path
             args["font"] = "osifont-lgpl3fe.ttf"
             args["date"] = date.fromisoformat(args.get("date")).strftime("%d.%m.%Y")
-            if args.get("groupname").isalnum() and args.get("surname").isalpha() and bool(re.match('[\w\s]+$', args.get("docname"))) and bool(re.match('[\w\-]+$', args.get("id"))):
+            if bool(re.match('[\w\s/]+$', args.get("groupname"))) and args.get("surname").isalpha() and bool(re.match('[\w\s]+$', args.get("docname"))) and bool(re.match('[\w-]+$', args.get("id"))):
                 fill = Template(template_file)
                 result = fill.substitute(args)
                 with tempfile.NamedTemporaryFile() as tmp:
