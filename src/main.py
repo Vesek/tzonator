@@ -19,7 +19,9 @@ with open(os.path.join(os.path.join(src_path, "templates"), 'template.tex'), 'r'
 @app.route("/", methods=['GET', 'POST'])
 def main():
     if request.method == 'POST':
-        args = dict(request.form)
+        args = dict()
+        for k,v in request.form.items():
+            args[k] = v.strip()
         try:
             if not all(len(string) <= 64 for string in args.values()):
                 raise Exception("Invalid values entered")
