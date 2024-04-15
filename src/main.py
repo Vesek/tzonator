@@ -24,7 +24,7 @@ def main():
             args[k] = v.strip()
         try:
             if not all(len(string) <= 64 for string in args.values()):
-                raise Exception("Invalid values entered")
+                raise Exception("Moc dlouhý vstup")
             args["fontdir"] = font_path
             args["font"] = "osifont-lgpl3fe.ttf"
             args["date"] = date.fromisoformat(args.get("date")).strftime("%d.%m.%Y")
@@ -42,7 +42,7 @@ def main():
                     os.remove(filename)
                 return send_file(pdf, mimetype='application/pdf', download_name=f'TZO-{args.get("surname")}-{args.get("id")}.pdf')
             else:
-                raise Exception("Invalid length or characters")
+                raise Exception("Neplatné znaky")
         except Exception as e:
             print(e)
             return render_template("index.html", error=f"Chyba: {e}")
