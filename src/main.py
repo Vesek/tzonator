@@ -20,7 +20,7 @@ with open(os.path.join(os.path.join(src_path, "templates"), 'template.tex'), 'r'
 def main():
     if request.method == 'POST':
         args = dict()
-        for k,v in request.form.items():
+        for k, v in request.form.items():
             args[k] = v.strip()
         try:
             if not all(len(string) <= 64 for string in args.values()):
@@ -28,7 +28,7 @@ def main():
             args["fontdir"] = font_path
             args["font"] = "osifont-lgpl3fe.ttf"
             args["date"] = date.fromisoformat(args.get("date")).strftime("%d.%m.%Y")
-            if bool(re.match('[\w\s/]+$', args.get("groupname"))) and args.get("surname").isalpha() and bool(re.match('[\w\s]+$', args.get("docname"))) and bool(re.match('[\w-]+$', args.get("id"))):
+            if bool(re.match(r"[\w\s\/,-]+$", args.get("groupname"))) and args.get("surname").isalpha() and bool(re.match(r"[\w\s\/,-]+$", args.get("docname"))) and bool(re.match(r"[\w-]+$", args.get("id"))):
                 fill = Template(template_file)
                 result = fill.substitute(args)
                 with tempfile.NamedTemporaryFile() as tmp:
