@@ -1,52 +1,114 @@
 <!doctype html>
 <html>
-<head>
-    <link rel="icon"
-        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%2210 0 100 100%22><text y=%22.90em%22 font-size=%2290%22>🔏</text></svg>">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../static/index.css">
-</head>
-<title>TZO-nátor 3000</title>
+    <head>
+        <link
+            rel="icon"
+            href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%2210 0 100 100%22><text y=%22.90em%22 font-size=%2290%22>🔏</text></svg>"
+        />
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="../static/index.css" />
+        <script src="../static/index.js"></script>
+    </head>
+    <title>TZO-nátor 3000</title>
 
-<body class="relative">
-    <div class="bg-gradient-to-bl from-neutral-400 to-cyan-700 dark:from-neutral-900 dark:to-cyan-950 from-10% w-screen min-h-svh select-none font-medium text-neutral-800 dark:text-neutral-300">
-        <header class="text-4xl min-[270px]:text-6xl px-1 pt-4 font-osifont bg-cyan-950/20 rounded-b-xl drop-shadow-xl">
-            TZO-nátor
-        </header>
-        <div class="place-content-center min-h-full flex">
-            <div class="p-4 w-full md:w-1/2">
-                <form action="/" method="post" class="flex flex-col">
-                    <div class="flex flex-col justify-center mx-auto w-full">
-                        <label for="docname">Název výkresu:</label>
-                        <input
-                            type=text oninput="this.value = this.value.toUpperCase()" name=docname placeholder="PRŮMĚTY" class="rounded my-1 bg-neutral-300 dark:bg-neutral-800 input">
-                        <label for="username">Příjmení:</label>
-                        <input
-                            type=text oninput="this.value = this.value.toUpperCase()" name=surname placeholder="MENČER" class="rounded my-1 bg-neutral-300 dark:bg-neutral-800 input">
-                        <label for="groupname">Název skupiny:</label>
-                        <input
-                            type=text oninput="this.value = this.value.toUpperCase()" name=groupname placeholder="4ZS1" class="rounded my-1 bg-neutral-300 dark:bg-neutral-800 input">
-                        <label for="id">ID:</label>
-                        <input
-                            type=text oninput="this.value = this.value.toUpperCase()" name=id placeholder="KC-69" class="rounded my-1 bg-neutral-300 dark:bg-neutral-800 input">
-                        <input
-                            type=date oninput="this.value = this.value.toUpperCase()" name=date id=date class="w-fit rounded my-3 bg-neutral-300 dark:bg-neutral-800 input mx-auto">
-                        <input
-                            type=submit value=Stáhnout class="bg-cyan-600 dark:bg-cyan-800 active:bg-cyan-700 dark:active:bg-cyan-900 border-2 border-neutral-700 hover:border-neutral-600 dark:border-neutral-600 dark:hover:border-neutral-700 rounded my-1 py-1 px-2 w-fit mx-auto">
-                    </div>
-                </form>
-                <p class="text-red-800 dark:text-red-600 text-center">{{error}}</p>
+    <body class="relative" onload="globalScan();">
+        <div class="bg-gradient-to-bl from-neutral-400 to-cyan-700 dark:from-neutral-900 dark:to-cyan-950 from-10% w-screen min-h-svh select-none font-medium text-neutral-800 dark:text-neutral-300">
+            <header class="text-4xl min-[270px]:text-6xl px-1 pt-4 font-osifont bg-cyan-950/20 rounded-b-xl drop-shadow-xl">
+                TZO-nátor
+            </header>
+            <div class="place-content-center min-h-full flex">
+                <div class="p-4 w-full md:w-1/2">
+                    <form action="/" method="post" class="flex flex-col">
+                        <div class="flex flex-col justify-center mx-auto w-full">
+                            <label for="docname">Název výkresu:</label>
+                            <div class="flex">
+                                <input
+                                    type="text"
+                                    oninput="onTextInput(this);"
+                                    name="docname"
+                                    placeholder="PRŮMĚTY"
+                                    class="input"
+                                />
+                                <p class="text-5xl error">
+                                    ✕
+                                </p>
+                            </div>
+                            <label for="username">Příjmení:</label>
+                            <div class="flex">
+                                <input
+                                    type="text"
+                                    oninput="onTextInput(this);"
+                                    name="surname"
+                                    placeholder="MENČER"
+                                    class="input"
+                                />
+                                <p class="text-5xl error">
+                                    ✕
+                                </p>
+                            </div>
+                            <label for="groupname">Název skupiny:</label>
+                            <div class="flex">
+                                <input
+                                    type="text"
+                                    oninput="onTextInput(this);"
+                                    name="groupname"
+                                    placeholder="4ZS1"
+                                    class="input"
+                                />
+                                <p class="text-5xl error">
+                                    ✕
+                                </p>
+                            </div>
+                            <label for="id">ID:</label>
+                            <div class="flex">
+                                <input
+                                    type="text"
+                                    oninput="onTextInput(this);"
+                                    name="id"
+                                    placeholder="KC-69"
+                                    class="input"
+                                />
+                                <p class="text-5xl error">
+                                    ✕
+                                </p>
+                            </div>
+                            <input
+                                type="date"
+                                name="date"
+                                id="date"
+                                class="w-fit my-3 input mx-auto"
+                            />
+                            <input
+                                disabled
+                                type="submit"
+                                name="button"
+                                value="Stáhnout"
+                                class="bg-cyan-600 dark:bg-cyan-800 enabled:active:bg-cyan-700 enabled:dark:active:bg-cyan-900 border-2 border-neutral-700 enabled:hover:border-neutral-600 dark:border-neutral-600 enabled:dark:hover:border-neutral-700 disabled:opacity-50 rounded my-1 py-1 px-2 w-fit mx-auto"
+                            />
+                        </div>
+                    </form>
+                    <p class="text-red-800 dark:text-red-600 text-center">
+                        {{error}}
+                    </p>
+                </div>
             </div>
+            <footer class="absolute bottom-2 right-2">
+                <p class="text-right text-sm sm:text-base">
+                    Vytvořil
+                    <a href="https://github.com/Vesek" class="link">Vesek</a>
+                    <br/>
+                    <a href="https://github.com/Vesek/tzonator" class="link">Kód</a>
+                    otevřený pod AGPL-3
+                    <br/>
+                </p>
+                <p class="text-right max-sm:hidden">
+                    Žádná data nejsou uchována
+                </p>
+            </footer>
         </div>
-        <footer class="absolute bottom-2 right-2">
-            <p class="text-right text-sm sm:text-base">Vytvořil <a href="https://github.com/Vesek" class="link">Vesek</a><br/><a href="https://github.com/Vesek/tzonator" class="link">Kód</a> otevřený pod AGPL-3<br/></p>
-            <p class="text-right max-sm:hidden">Žádná data nejsou uchována</p>
-        </footer>
-    </div>
-    <script>
-        document.getElementById('date').valueAsDate = new Date();
-    </script>
-</body>
-
+        <script>
+            document.getElementById("date").valueAsDate = new Date();
+        </script>
+    </body>
 </html>
