@@ -20,6 +20,9 @@
     .success {
         @apply text-cyan-700 dark:text-cyan-800 text-center;
     }
+    .mark{
+        @apply font-normal font-osifont text-center ml-1 mt-2 -mb-2 text-6xl;
+    }
     .link{
         @apply text-cyan-900 dark:text-cyan-600;
     }
