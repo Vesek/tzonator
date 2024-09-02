@@ -1,11 +1,11 @@
-FROM python:3.11-slim
+FROM python:slim
 
 # upgrade pip
 RUN pip install --upgrade pip
 
 # install texlive
 ENV DEBIAN_FRONTEND=noninteractive
-RUN apt update && apt install -y texlive-xetex texlive-latex-extra texlive-fonts-recommended texlive-fonts-extra texlive-lang-all texlive-latex-recommended && rm -rf /var/lib/apt/lists/*
+RUN apt update && apt install -y texlive-xetex texlive-fonts-recommended texlive-lang-english texlive-lang-czechslovak texlive-latex-recommended && rm -rf /var/lib/apt/lists/*
 
 # permissions and nonroot user for tightened security
 RUN adduser --disabled-password --comment "" flask
