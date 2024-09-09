@@ -1,6 +1,6 @@
 function globalScan(){
   var names = ["docname", "surname", "groupname", "id"];
-  var regexp = [/^[\p{L}\s\/,\-]+$/u, /^[\p{L}]+$/u, /^[\p{L}\s\/,\-]+$/u, /^[\p{L}-]+$/u];
+  var regexp = [/^[\p{L}\d\s\/,\-]+$/u, /^[\p{L}\d]+$/u, /^[\p{L}\d\s\/,\-]+$/u, /^[\p{L}\d-]+$/u];
   var ready = true;
   for (let i = 0; i < names.length; i++){
     element = document.getElementsByName(names[i])[0];
