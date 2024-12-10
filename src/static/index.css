@@ -681,12 +681,16 @@ video {
   display: flex;
 }
 
+.max-h-svh {
+  max-height: 100svh;
+}
+
 .min-h-full {
   min-height: 100%;
 }
 
-.min-h-svh {
-  min-height: 100svh;
+.min-h-screen {
+  min-height: 100vh;
 }
 
 .w-fit {
