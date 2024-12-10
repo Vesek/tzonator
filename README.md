@@ -15,5 +15,5 @@ Docker kontejner instaluje jen část tex-live, bohužel však i tak vyžaduje X
 Velké díky [hikikomori82](https://github.com/hikikomori82) za jeho úžasný open-source ISO font: [osifont](https://github.com/hikikomori82/osifont)
 
 ## TODO
-- [ ] Udělat styl
-- [ ] Předělat to konfiguráku
+- [ ] Lepší styly
+- [ ] Data-driven generátor
