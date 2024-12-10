@@ -41,7 +41,7 @@ def main():
                         pdf = BytesIO(pdf_f.read()) # Load the file
                 for filename in glob.glob(tmp_name + "*"):
                     os.remove(filename) # Remove the file and all TeX's cache files
-                return send_file(pdf, mimetype='application/pdf', download_name=f'TZO-{args.get("surname")}-{args.get("id")}.pdf') # Send the compiled file
+                return send_file(pdf, mimetype='application/pdf', as_attachment=True, download_name=f'TZO-{args.get("surname")}-{args.get("id")}.pdf') # Send the compiled file
             else:
                 raise Exception("Neplatné znaky")
         except Exception as e:
