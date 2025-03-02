@@ -1,29 +1,51 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
+
+@theme {
+  --font-osifont: OSIfont;
+}
+
+/*
+  The default border color has changed to `currentColor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentColor);
+  }
+}
+
+@utility input {
+  @apply font-normal text-neutral-900 dark:text-neutral-200 placeholder:text-neutral-600 p-2 border border-neutral-600 rounded-sm my-1 bg-neutral-300 dark:bg-neutral-800  w-full;
+}
+
+@utility error {
+  @apply text-gray-700 dark:text-neutral-600 text-center;
+}
+
+@utility success {
+  @apply text-cyan-700 dark:text-cyan-800 text-center;
+}
+
+@utility mark {
+  @apply font-normal font-osifont text-center ml-1 mt-2 -mb-2 text-6xl;
+}
+
+@utility link {
+  @apply text-cyan-900 dark:text-cyan-600;
+}
 
 @layer base {
     @font-face  {
         font-family: OSIfont;
         font-weight: 400;
         src: url(../fonts/osifont-lgpl3fe.ttf);
-    }
-}
-
-@layer components{
-    .input {
-        @apply font-normal text-neutral-900 dark:text-neutral-200 placeholder:text-neutral-600 p-2 border border-neutral-600 rounded my-1 bg-neutral-300 dark:bg-neutral-800  w-full;
-    }
-    .error {
-        @apply text-gray-700 dark:text-neutral-600 text-center;
-    }
-    .success {
-        @apply text-cyan-700 dark:text-cyan-800 text-center;
-    }
-    .mark{
-        @apply font-normal font-osifont text-center ml-1 mt-2 -mb-2 text-6xl;
-    }
-    .link{
-        @apply text-cyan-900 dark:text-cyan-600;
     }
 }
