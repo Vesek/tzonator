@@ -2,18 +2,16 @@
 Generátor templatu (nejen) na TZO
 
 ## Co to je?
-"Vyplňovač" TeX templatu protože chcu a protože Menčer.
+"Vyplňovač" papíru na TZO protože chcu a protože Menčer.
 
-## Požadavky
-Fonty se musí stáhnout, je na to shell script download_fonts.sh.
+## Setup
+Font se stahuje automaticky i při buildu.
 
-Na generování se hodí celý [tex-live](https://wiki.archlinux.org/title/TeX_Live) i s rozšířeními pro jazyky.
+Doporučuji použít `docker-compose` pro snadnou instalaci a spuštění.
 
-Docker kontejner instaluje jen část tex-live, bohužel však i tak vyžaduje X11.
+```
+docker compose up --build -d
+```
 
 ## Zdroje
 Velké díky [hikikomori82](https://github.com/hikikomori82) za jeho úžasný open-source ISO font: [osifont](https://github.com/hikikomori82/osifont)
-
-## TODO
-- [ ] Lepší styly
-- [ ] Data-driven generátor

@@ -1,31 +1,23 @@
-FROM python:slim
+# Stage 1: Build the Vite app
+FROM node:alpine AS builder
 
-# upgrade pip
-RUN pip install --upgrade pip
+WORKDIR /app
 
-# install texlive
-ENV DEBIAN_FRONTEND=noninteractive
-RUN apt update && apt install -y texlive-xetex texlive-fonts-recommended texlive-lang-english texlive-lang-czechslovak texlive-latex-recommended && rm -rf /var/lib/apt/lists/*
+COPY package*.json ./
+RUN npm install
 
-# permissions and nonroot user for tightened security
-RUN adduser --disabled-password --comment "" flask
-RUN mkdir /home/app/ && chown -R flask:flask /home/app
-WORKDIR /home/app
-USER flask
+COPY . .
+RUN npm run build
 
-# copy all the files to the container
-COPY --chown=flask:flask . .
+# Stage 2: Serve with Nginx
+FROM nginx:alpine
 
-# venv
-ENV VIRTUAL_ENV=/home/app/venv
+# Copy custom Nginx config
+COPY nginx.conf /etc/nginx/conf.d/default.conf
 
-# python setup
-RUN python -m venv $VIRTUAL_ENV --system-site-packages
-ENV PATH="$VIRTUAL_ENV/bin:$PATH"
-RUN pip install -r requirements.txt
+# Copy built files from builder
+COPY --from=builder /app/dist /usr/share/nginx/html
 
-# define the port number the container should expose
-EXPOSE 5000
-ENV PYTHONUNBUFFERED 1
+EXPOSE 80
 
-CMD ["gunicorn", "-w", "4", "--bind", "0.0.0.0:5000", "wsgi:app"]
+CMD ["nginx", "-g", "daemon off;"]
