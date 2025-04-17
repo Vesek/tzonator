@@ -10,7 +10,7 @@ export default function App() {
   });
 
   const maxFieldLengths = {
-    docName: 30,
+    docName: 40,
     surname: 20,
     groupName: 8,
     id: 8,
