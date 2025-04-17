@@ -1,6 +1,4 @@
-import { useState } from "react";
-import { PDFDocument, PageSizes } from "pdf-lib";
-import fontkit from "@pdf-lib/fontkit";
+import { useEffect, useState } from "react";
 
 export default function App() {
   const [formData, setFormData] = useState({
@@ -11,6 +9,21 @@ export default function App() {
     date: new Date().toISOString().split("T")[0],
   });
 
+  const [pdfLib, setPdfLib] = useState(null);
+  const [fontkit, setFontkit] = useState(null);
+  const isReady = pdfLib && fontkit;
+
+  // Dynamically load pdf-lib and fontkit on mount
+  useEffect(() => {
+    const loadLibraries = async () => {
+      const pdfLibModule = await import("pdf-lib");
+      const fontkitModule = await import("@pdf-lib/fontkit");
+      setPdfLib(pdfLibModule);
+      setFontkit(fontkitModule.default); // default export
+    };
+    loadLibraries();
+  }, []);
+
   const handleChange = (e) => {
     const field = e.target;
     field.value = field.value.toUpperCase();
@@ -19,13 +32,15 @@ export default function App() {
   };
 
   const generatePDF = async () => {
+    const { PDFDocument, PageSizes } = pdfLib;
+
     const pdfDoc = await PDFDocument.create();
     pdfDoc.registerFontkit(fontkit);
 
     const A4_WIDTH = PageSizes.A4[0]; // width
     const A4_HEIGHT = PageSizes.A4[1]; // height
 
-    const page = pdfDoc.addPage([A4_WIDTH, A4_HEIGHT]); // A4 size
+    const page = pdfDoc.addPage([A4_WIDTH, A4_HEIGHT]); // Portrait A4
 
     const fontBytes = await fetch("/fonts/osifont-lgpl3fe.ttf").then((res) =>
       res.arrayBuffer(),
@@ -41,9 +56,8 @@ export default function App() {
     const { docName, surname, groupName, id, date } = formData;
 
     const date_object = new Date(date);
-
     const day = String(date_object.getDate()).padStart(2, "0");
-    const month = String(date_object.getMonth() + 1).padStart(2, "0"); // Months are zero-based
+    const month = String(date_object.getMonth() + 1).padStart(2, "0");
     const year = date_object.getFullYear();
     const formatted_date = `${day}.${month}.${year}`;
 
@@ -128,10 +142,16 @@ export default function App() {
         />
         <button
           onClick={generatePDF}
+          disabled={!isReady}
           className="bg-cyan-600 dark:bg-cyan-800 enabled:active:bg-cyan-700 dark:enabled:active:bg-cyan-900 border-2 border-neutral-700 enabled:hover:border-neutral-600 dark:border-neutral-600 dark:enabled:hover:border-neutral-700 disabled:opacity-50 rounded-sm my-1 py-1 px-2 w-fit mx-auto"
         >
           Stáhnout
         </button>
+        <p
+          className={`text-center text-sm ${isReady ? "invisible" : "visible"}`}
+        >
+          Načítání knihoven…
+        </p>
       </div>
     </div>
   );
