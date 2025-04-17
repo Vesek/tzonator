@@ -9,6 +9,15 @@ export default function App() {
     date: new Date().toISOString().split("T")[0],
   });
 
+  const maxFieldLengths = {
+    docName: 30,
+    surname: 20,
+    groupName: 8,
+    id: 8,
+  };
+
+  const [areFieldsValid, setAreFieldsValid] = useState(false);
+
   const [pdfLib, setPdfLib] = useState(null);
   const [fontkit, setFontkit] = useState(null);
   const isReady = pdfLib && fontkit;
@@ -28,7 +37,18 @@ export default function App() {
     const field = e.target;
     field.value = field.value.toUpperCase();
     const { name, value } = field;
-    setFormData({ ...formData, [name]: value });
+
+    const updatedFormData = { ...formData, [name]: value };
+    setFormData(updatedFormData);
+
+    const fieldsInvalid = Object.entries(updatedFormData)
+      .filter(([key]) => key !== "date")
+      .some(([key, value]) => {
+        const maxLength = maxFieldLengths[key] ?? 20;
+        return value.length > maxLength || value.length === 0;
+      });
+
+    setAreFieldsValid(!fieldsInvalid);
   };
 
   const generatePDF = async () => {
@@ -142,7 +162,7 @@ export default function App() {
         />
         <button
           onClick={generatePDF}
-          disabled={!isReady}
+          disabled={!isReady || !areFieldsValid}
           className="bg-cyan-600 dark:bg-cyan-800 enabled:active:bg-cyan-700 dark:enabled:active:bg-cyan-900 border-2 border-neutral-700 enabled:hover:border-neutral-600 dark:border-neutral-600 dark:enabled:hover:border-neutral-700 disabled:opacity-50 rounded-sm my-1 py-1 px-2 w-fit mx-auto"
         >
           Stáhnout
