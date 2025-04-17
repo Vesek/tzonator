@@ -129,6 +129,15 @@ export default function App() {
     //   borderWidth: 1.5,
     // });
 
+    pdfDoc.setTitle("TZO template");
+    pdfDoc.setAuthor("TZO-nátor");
+    pdfDoc.setSubject("Absolutně epickej template na TeChIcKÉ ZoBrAzOváNí");
+    pdfDoc.setKeywords(["tzo", "tzonator"]);
+    pdfDoc.setProducer("Vesek");
+    pdfDoc.setCreator("tzonator (https://github.com/Vesek/tzonator)");
+    pdfDoc.setCreationDate(new Date());
+    pdfDoc.setModificationDate(new Date());
+
     const pdfBytes = await pdfDoc.save();
     const blob = new Blob([pdfBytes], { type: "application/pdf" });
     const url = URL.createObjectURL(blob);
