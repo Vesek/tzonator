@@ -10,20 +10,20 @@ createRoot(document.getElementById("root")).render(
         <p className="text-5xl min-[320px]:text-7xl font-osifont">TZO-nátor</p>
         <App />
       </div>
-      <footer class="absolute bottom-2 right-2">
-        <p class="text-right text-sm sm:text-base">
+      <footer className="absolute bottom-2 right-2">
+        <p className="text-right text-sm sm:text-base">
           Vytvořil&nbsp;
-          <a href="https://github.com/Vesek" class="link">
+          <a href="https://github.com/Vesek" className="link">
             Vesek
           </a>
           <br />
-          <a href="https://github.com/Vesek/tzonator" class="link">
+          <a href="https://github.com/Vesek/tzonator" className="link">
             Kód
           </a>
           &nbsp;otevřený pod AGPL-3
           <br />
         </p>
-        <p class="text-right max-sm:hidden">Žádná data nejsou uchována</p>
+        <p className="text-right max-sm:hidden">Žádná data nejsou uchována</p>
       </footer>
     </div>
   </StrictMode>,
