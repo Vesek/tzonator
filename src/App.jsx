@@ -9,6 +9,13 @@ export default function App() {
     date: new Date().toISOString().split("T")[0],
   });
 
+  const fieldLabels = {
+    docName: "Název výkresu",
+    surname: "Příjmení",
+    groupName: "Název skupiny",
+    id: "ID",
+  };
+
   const maxFieldLengths = {
     docName: 40,
     surname: 20,
@@ -43,24 +50,25 @@ export default function App() {
     const updatedFormData = { ...formData, [name]: value };
     setFormData(updatedFormData);
 
-    const fieldsInvalid = Object.entries(updatedFormData)
+    let hasInvalidField = false;
+    let errorMessage = "";
+
+    Object.entries(updatedFormData)
       .filter(([key]) => key !== "date")
-      .some(([key, value]) => {
+      .forEach(([key, value]) => {
         const maxLength = maxFieldLengths[key] ?? 20;
-        const isTooLong = value.length > maxLength;
-        if (isTooLong) {
-          setStatusMessage("Příliš dlouhý vstup!");
+
+        if (value.length === 0) {
+          hasInvalidField = true;
+        } else if (value.length > maxLength) {
+          hasInvalidField = true;
+          const label = fieldLabels[key] || key;
+          errorMessage = `Pole „${label}“ je příliš dlouhé (${value.length}/${maxLength})`;
         }
-        return isTooLong || value.length === 0;
       });
 
-    setAreFieldsValid(!fieldsInvalid);
-
-    if (!fieldsInvalid) {
-      setStatusMessage("");
-    } else {
-      return;
-    }
+    setAreFieldsValid(!hasInvalidField);
+    setStatusMessage(hasInvalidField ? errorMessage : "");
   };
 
   const generatePDF = async () => {
@@ -145,9 +153,9 @@ export default function App() {
     link.click();
   };
 
-  const renderField = (label, name, placeholder) => (
+  const renderField = (name, placeholder) => (
     <>
-      <label htmlFor={name}>{label}</label>
+      <label htmlFor={name}>{fieldLabels[name]}</label>
       <input
         name={name}
         placeholder={placeholder}
@@ -160,10 +168,10 @@ export default function App() {
 
   return (
     <div className="p-6 max-w-2xl w-full mx-auto space-y-1">
-      {renderField("Název výkresu:", "docName", "PRŮMĚTY")}
-      {renderField("Příjmení:", "surname", "MENČER")}
-      {renderField("Název skupiny:", "groupName", "4ZS1")}
-      {renderField("ID:", "id", "KC-69")}
+      {renderField("docName", "PRŮMĚTY")}
+      {renderField("surname", "MENČER")}
+      {renderField("groupName", "4ZS1")}
+      {renderField("id", "KC-69")}
       <div className="flex flex-col">
         <input
           type="date"
