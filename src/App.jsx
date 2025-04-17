@@ -20,7 +20,8 @@ export default function App() {
 
   const [pdfLib, setPdfLib] = useState(null);
   const [fontkit, setFontkit] = useState(null);
-  const isReady = pdfLib && fontkit;
+  const [statusMessage, setStatusMessage] = useState("Načítání knihoven…");
+  const isReady = pdfLib && fontkit && areFieldsValid;
 
   // Dynamically load pdf-lib and fontkit on mount
   useEffect(() => {
@@ -29,6 +30,7 @@ export default function App() {
       const fontkitModule = await import("@pdf-lib/fontkit");
       setPdfLib(pdfLibModule);
       setFontkit(fontkitModule.default); // default export
+      setStatusMessage("");
     };
     loadLibraries();
   }, []);
@@ -45,10 +47,20 @@ export default function App() {
       .filter(([key]) => key !== "date")
       .some(([key, value]) => {
         const maxLength = maxFieldLengths[key] ?? 20;
-        return value.length > maxLength || value.length === 0;
+        const isTooLong = value.length > maxLength;
+        if (isTooLong) {
+          setStatusMessage("Příliš dlouhý vstup!");
+        }
+        return isTooLong || value.length === 0;
       });
 
     setAreFieldsValid(!fieldsInvalid);
+
+    if (!fieldsInvalid) {
+      setStatusMessage("");
+    } else {
+      return;
+    }
   };
 
   const generatePDF = async () => {
@@ -167,11 +179,7 @@ export default function App() {
         >
           Stáhnout
         </button>
-        <p
-          className={`text-center text-sm ${isReady ? "invisible" : "visible"}`}
-        >
-          Načítání knihoven…
-        </p>
+        <p className="text-center text-sm min-h-[1.25rem]">{statusMessage}</p>
       </div>
     </div>
   );
