@@ -25,7 +25,9 @@ createRoot(document.getElementById("root")).render(
           &nbsp;otevřený pod AGPL-3
           <br />
         </p>
-        <p className="text-right max-sm:hidden">Žádná data nejsou uchována</p>
+        <p className="text-right max-sm:hidden">
+          Vše je zpracováno na zařízení
+        </p>
       </footer>
     </div>
   </StrictMode>,
