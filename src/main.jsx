@@ -7,7 +7,7 @@ createRoot(document.getElementById("root")).render(
   <StrictMode>
     <div className="background relative w-screen min-h-dvh select-none font-medium text-neutral-800 dark:text-neutral-300">
       <div className="flex flex-col items-center justify-center min-h-dvh">
-        <p className="text-5xl min-[320px]:text-7xl font-osifont mt-4">
+        <p className="text-5xl min-[320px]:text-7xl font-osifont mt-4 text-nowrap">
           TZO-nátor
         </p>
         <App />
