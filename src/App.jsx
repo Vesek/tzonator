@@ -50,25 +50,11 @@ export default function App() {
     const updatedFormData = { ...formData, [name]: value };
     setFormData(updatedFormData);
 
-    let hasInvalidField = false;
-    let errorMessage = "";
-
-    Object.entries(updatedFormData)
-      .filter(([key]) => key !== "date")
-      .forEach(([key, value]) => {
-        const maxLength = maxFieldLengths[key] ?? 20;
-
-        if (value.length === 0) {
-          hasInvalidField = true;
-        } else if (value.length > maxLength) {
-          hasInvalidField = true;
-          const label = fieldLabels[key] || key;
-          errorMessage = `Pole „${label}“ je příliš dlouhé (${value.length}/${maxLength})`;
-        }
-      });
+    const hasInvalidField = Object.values(updatedFormData)
+      .filter((value, index) => index !== updatedFormData.date) // filters out "date"
+      .some((value) => value.length === 0);
 
     setAreFieldsValid(!hasInvalidField);
-    setStatusMessage(hasInvalidField ? errorMessage : "");
   };
 
   const generatePDF = async () => {
@@ -161,6 +147,7 @@ export default function App() {
         placeholder={placeholder}
         value={formData[name]}
         onChange={handleChange}
+        maxLength={maxFieldLengths[name]}
         className="input"
       />
     </>
