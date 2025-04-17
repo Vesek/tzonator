@@ -85,7 +85,7 @@ export default function App() {
     const fontBytes = await fetch("/fonts/osifont-lgpl3fe.ttf").then((res) =>
       res.arrayBuffer(),
     );
-    const customFont = await pdfDoc.embedFont(fontBytes);
+    const customFont = await pdfDoc.embedFont(fontBytes, { subset: true });
 
     const fontSize = 19;
     const margin = 28.35;
